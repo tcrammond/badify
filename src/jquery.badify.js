@@ -154,11 +154,9 @@
 
 	Plugin.prototype = {
 		init: function() {
-			// trigger bindable event
 			$(this.element).trigger("badify.init.begin");
 
 			var text = $(this.element).val().toLowerCase();
-			var newText =  $(this.element).val();
 			var bads = [];
 			var userElements = [];
 
@@ -166,21 +164,16 @@
 				if(this._elements[i].symbol.length < 2) continue;
 
 				var symbol = this._elements[i].symbol;
-
 				var index = text.indexOf(symbol.toLowerCase());
+
 				if(index == -1) continue;
 
 				userElements.push(this._elements[i].name);
-
-				newText = newText.slice(0, index) + '[' + symbol + ']' + newText.slice(index + symbol.length, newText.length);
-				// bads.push(newText);
-				console.debug(text);
+				text = text.slice(0, index) + '[' + symbol + ']' + text.slice(index + symbol.length, text.length);
 			}
 
-			newText = newText.replace(/\[/g, '<span>[').replace(/\]/g, ']</span>');
-			// $(this.element).html(bads.join('<br>'));
-			$(this.options.output).html('<h2>Badified: </h2>' + newText + '<br><br><h3>Elements:</h3>' + userElements.join('<br>'));
-
+			text = text.replace(/\[/g, '<span>[').replace(/\]/g, ']</span>');
+			$(this.options.output).html('<h2>Badified: </h2>' + text + '<br><br><h2>Your elements:</h2>' + userElements.join('<br>'));
 		},
 
 		doCommand: function(command) {
