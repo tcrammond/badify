@@ -1,0 +1,36 @@
+{
+	"name": "badify",
+	"title": "jQuery Badify",
+	"description": "A plugin to [Ba]dify your content.",
+	"keywords": [
+		"jquery",
+		"badify",
+		"plugins"
+	],
+	"version": "0.0.1",
+	"author": {
+		"name": "Tyler Crammond",
+		"email": "tyler@podpea.co.uk",
+		"url": "http://tylercrammond.com/badify"
+	},
+	"maintainers": [
+		{
+			"name": "Tyler Crammond",
+			"email": "tyler@podpea.co.uk",
+			"url": "http://tylercrammond.com/badify"
+		}
+	],
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "http://mit-license.org"
+		}
+	],
+	"bugs": "",
+	"homepage": "",
+	"docs": "",
+	"download": "",
+	"dependencies": {
+		"jquery": ">=1.4"
+	}
+}
