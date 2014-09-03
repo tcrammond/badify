@@ -142,7 +142,6 @@
 	// The actual plugin constructor
 	function Plugin(element, options) {
 		this.element = element;
-		this.time = null;
 
 		this.options = $.extend({}, defaults, options);
 		this.formFields = [];
@@ -154,55 +153,56 @@
 
 	Plugin.prototype = {
 		init: function() {
-			$(this.element).trigger("badify.init.begin");
+			$(this.element).trigger("badify.begin");
 
-			var text = $(this.element).val().toLowerCase();
-			var bads = [];
+			var text = $(this.element).val();
 			var userElements = [];
 
+			//TODO: we only want to badify one element per word.
+			
 			for(var i=0; i<this._elements.length; i++){
+
+				// Let's not match single character elements.
 				if(this._elements[i].symbol.length < 2) continue;
 
+				// Does this element occur?
 				var symbol = this._elements[i].symbol;
 				var index = text.indexOf(symbol.toLowerCase());
 
+				// Nope!
 				if(index == -1) continue;
 
+				// Yep!
 				userElements.push(this._elements[i].name);
-				text = text.slice(0, index) + '[' + symbol + ']' + text.slice(index + symbol.length, text.length);
+				text = this.badifyElement(text, symbol, index);
 			}
 
+			// use spans for highlighting the elements.
 			text = text.replace(/\[/g, '<span>[').replace(/\]/g, ']</span>');
+
+			// Output the badified text and the element names in designated location
 			$(this.options.output).html('<h2>Badified: </h2>' + text + '<br><br><h2>Your elements:</h2>' + userElements.join('<br>'));
+
+			$(this.element).trigger("badify.end");
 		},
 
-		doCommand: function(command) {
-			switch (command) {
-				case "reset":
-					this.init();
-					break;
-				default:
-					console.error("badify: invalid command '" + command + "'");
-					break;
-			}
+		badifyElement: function(text, symbol, index) {
+			return text.slice(0, index) + '[' + symbol + ']' + text.slice(index + symbol.length, text.length);
 		}
 	};
 
 
 	$.fn[pluginName] = function(options) {
-		if (options && typeof options !== "object") {
-			console.debug("command received");
-			var command = options;
 
-			thePlugin.doCommand(command);
+		if(!options){
+			console.error("badify: 'output' option is required.");
 			return;
 		}
-		
-		// prevent multiple instantiations of the plugin - NOPE
+
+		// Would normally prevent multiple instantiations of the plugin here, but as it's
+		// just performing one task...
 		return this.each(function() {
-			// if (!$.data(this, "plugin_" + pluginName)) {
 				thePlugin = $.data(this, "plugin_" + pluginName, new Plugin(this, options));
-			// }
 		});
 	};
 
