@@ -1,3 +1,11 @@
+/*
+ *  jQuery Badify - v0.0.1
+ *  A plugin to [Ba]dify your content.
+ *  
+ *
+ *  Copyright Tyler Crammond 2014
+ *  Under MIT License
+ */
 
 ;(function($, window, document, undefined) {
 	// the semi-colon before function invocation is a safety net against concatenated
