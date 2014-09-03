@@ -5,9 +5,9 @@ A jQuery plugin to (breaking) badify your text.
 
 Usage
 =====
-Include dist/jquery.badify.js.
+Include dist/jquery.badify.min.js.
 
-`$('#mySelector').badify();`
+`$('#myInput').badify({output: '#myOutput'});`
 
 Dependencies
 =====
