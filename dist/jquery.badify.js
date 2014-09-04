@@ -178,7 +178,7 @@
 
 				// Does this element occur?
 				symbol = this._elements[i].symbol,
-				index = text.indexOf(symbol.toLowerCase());
+				index = text.toLowerCase().indexOf(symbol.toLowerCase());
 
 				// Nope!
 				if(index === -1) {
