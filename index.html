@@ -58,7 +58,7 @@
 
                     <input type="text" class="form-control" id="badify" placeholder="Enter something to badify">
 
-                  <p><a class="btn btn-danger btn-lg" style="margin-top: 20px;" onclick="javascript:$('#badify').badify({output: '#badoutput'});" role="button">Badify!</a></p>
+                  <p><a class="btn btn-danger btn-lg badify" style="margin-top: 20px;" onclick="javascript:$('#badify').badify({output: '#badoutput'});" role="button">Badify!</a></p>
                   </div>
 
                 <div class="col-md-6" id="badoutput">
@@ -67,4 +67,13 @@
                 </div>
             </div>
         </body>
+        <script>
+        $(function(){
+            $('input').on('keydown', function(e){
+                if(e.keyCode == 13){
+                    $('a.badify').click();
+                }
+            })
+        });
+        </script
     </html>
